@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/00a7ab4cb7.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" type="text/css" href="Advanced_Weather.css" />
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@4.0.2/dist/timeago.min.js"></script>
+    <link rel="icon" href="data:image/jpeg;base64,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">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="left">
+        <div class="container">
+          <div class="header">
+            <div class="date" id="date"></div>
+            <div class="searchBar">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input class="searchInput" id="searchInput" type="text" />
+              <button class="searchButton">
+                Search
+              </button>
+            </div>
+          </div>
+          <div class="todayOverview">
+            <div class="sectionTitle">Today Overview</div>
+            <div class="row">
+              <div class="overviewProp">
+                <div class="propIconContainer">
+                  <i class="propIcon fa-solid fa-wind"></i>
+                </div>
+                <div class="propValueContainer">
+                  <div class="propTitle">Wind</div>
+                  <div class="propMain">
+                    <span class="primaryData">
+                      <span class="propValue" id="wind"></span>
+                      <span class="propMetric">mph</span>
+                    </span>
+                    <span class="secondaryData" id="windDir"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="overviewProp">
+                <div class="propIconContainer">
+                  <i class="propIcon fa-solid fa-temperature-half"></i>
+                </div>
+                <div class="propValueContainer">
+                  <div class="propTitle">Lowest / Highest</div>
+                  <div class="propMain">
+                    <span class="primaryData">
+                      <span class="propValue" id="lowestToday"></span>
+                      <span class="propMetric">˚F</span>
+                      <span> / </span>
+                      <span class="propValue" id="highestToday"></span>
+                      <span class="propMetric">˚F</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="overviewProp">
+                <div class="propIconContainer">
+                  <i class="propIcon fa-solid fa-water"></i>
+                </div>
+                <div class="propValueContainer">
+                  <div class="propTitle">Pressure</div>
+                  <div class="propMain">
+                    <span class="primaryData">
+                      <span class="propValue" id="pressure"></span>
+                      <span class="propMetric">hpa</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="overviewProp">
+                <div class="propIconContainer">
+                  <i class="propIcon fa-solid fa-droplet"></i>
+                </div>
+                <div class="propValueContainer">
+                  <div class="propTitle">Humidity</div>
+                  <div class="propMain">
+                    <span class="primaryData">
+                      <span class="propValue" id="humidity"></span>
+                      <span class="propMetric">%</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tempForecast">
+            <div class="sectionTitle">Forecast</div>
+            <div class="forecast_grid">
+            <div id="Forecast_1" class="forecast_same">
+              <div id="f1_time" class="f_time">3 </div><br>
+              <div id="f1_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f1_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f1_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_2" class="forecast_same">
+              <div id="f2_time" class="f_time">3 </div><br>
+              <div id="f2_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f2_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f2_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_3" class="forecast_same">
+              <div id="f3_time"class="f_time">3 </div><br>
+              <div id="f3_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f3_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f3_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_4" class="forecast_same">
+              <div id="f4_time" class="f_time">3 </div><br>
+              <div id="f4_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f4_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f4_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_5" class="forecast_same">
+              <div id="f5_time" class="f_time">3 </div><br>
+              <div id="f5_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f5_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f5_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_6" class="forecast_same">
+              <div id="f6_time" class="f_time">3 </div><br>
+              <div id="f6_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f6_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f6_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_7" class="forecast_same">
+              <div id="f7_time" class="f_time">3 </div><br>
+              <div id="f7_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f7_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f7_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_8" class="forecast_same">
+              <div id="f8_time" class="f_time">3 </div><br>
+              <div id="f8_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f8_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f8_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_9" class="forecast_same">
+              <div id="f9_time" class="f_time">3 </div><br>
+              <div id="f9_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f9_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f9_wind">3</span>mph</div>
+            </div>
+            <div id="Forecast_10" class="forecast_same">
+              <div id="f10_time" class="f_time">3 </div><br>
+              <div id="f10_description" class="f_description">Clear</div><br>
+              <div class="f_temp"><span id="f10_temp">30</span>&deg;F</div>
+              <div class="f_wind"><span id="f10_wind">3</span>mph</div>
+            </div>
+
+            
+          </div> 
+
+            <!-- <div id="chart" style="width: 100%; height: 400px"></div> -->
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="rightContainer">
+          <div class="top">
+            <div class="location" id="location"></div>
+            <div class="time" id="time"></div>
+          </div>
+          <div class="currentWeather">
+            <div class="weatherIconContainer">
+              <img src="" alt="weather icon" id="weatherIcon" />
+            </div>
+            <div class="currentTemperatureValueContainer">
+              <span class="currentTemperatureValue" id="currentTemp"></span>
+              <span class="currentTemperatureMetric">˚F</span>
+            </div>
+            <div class="temperatureDescription" id="weatherDescription"></div>
+          </div>
+          <div class="sectionTitle">Sunrise & Sunset</div>
+          <div class="sunStageContainer">
+            <div class="sunIcon"><i class="fa-solid fa-sun"></i></div>
+            <div class="col">
+              <div class="sunStageTitle">Sunrise</div>
+              <div class="sunTime" id="sunrise"></div>
+            </div>
+            <div class="sunTimeRelative" id="sunriseRelative"></div>
+          </div>
+          <div class="sunStageContainer">
+            <div class="sunIcon"><i class="fa-solid fa-moon"></i></div>
+            <div class="col">
+              <div class="sunStageTitle">Sunset</div>
+              <div class="sunTime" id="sunset"></div>
+            </div>
+            <div class="sunTimeRelative" id="sunsetRelative"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="Advanced_Weather.js"></script>
+  </body>
+</html>
+
